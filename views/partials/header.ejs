@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="A content management system node app by Nicholas Ewing.">
+	<meta name="keywords" content="NodeJS project, content management system, Nicholas Ewing">
+	<meta name="author" content="Nicholas Ewing">
+	<title>Basic CMS</title>
+	<base href="/">
+	<link rel="stylesheet" type="text/css" href="css/layout.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div id="branding">
+				<h1><a href="/">Blogify<span id="branding-b">.</span></a></h1>
+			</div>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">
+							<i class="fas fa-home head-icon"></i>
+								Home
+						</a>
+					</li>
+					<li>
+						<a href="/users">
+							<i class="fas fa-users head-icon"></i>
+								Users
+							</span>
+							</a>
+					</li>
+					<% if(!currentUser) { %>
+						<li>
+							<a href="/login">
+								<i class="fas fa-sign-in-alt head-icon"></i>
+									Login
+							</a>
+						</li>
+						<li>
+							<a href="/register">
+								<i class="fas fa-user-plus head-icon"></i>
+									Register
+							</a>
+						</li>
+					<% } else { %>
+						<li>
+							<a href="/users/<%=currentUser.username%>">
+								<i class="fas fa-user-circle head-icon"></i>
+									<%= currentUser.username %>
+							</a>
+						</li>
+						<li>
+							<a href="/logout">
+								<i class="fas fa-sign-out-alt head-icon"></i>
+								Logout
+							</a>
+						</li>
+					<% } %>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<% flash.forEach((message) => { %>
+		<% console.log(message)%>
+		<% if(message.type.includes("toast")) { %>
+			<div class="container">
+				<p class="<%= message.type %>"><%=message.message%><span onclick="closeToast()"><i class="far fa-times-circle"></i></span></p>
+			</div>
+			<% flash.pop()%>
+		<% } %>
+	<% }); %>
