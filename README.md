@@ -7,10 +7,10 @@ HTML5,
 
 CSS3,
 
-JavaScript
-,
-Node.js
-,
-Express / EJS
-,
+JavaScript,
+
+Node.js,
+
+Express / EJS,
+
 Heroku
